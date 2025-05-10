@@ -15,5 +15,7 @@ echo "Include = /etc/pacman.d/aarchd-mirrorlist" >> /etc/pacman.conf
 
 # set SigLevel to default
 sed -i "s/^[[:space:]]*SigLevel[[:space:]]*=.*$/SigLevel = Required DatabaseOptional/" "/etc/pacman.conf"
+# other stuff 
+sed -i '/^#Color/s/^#//' /etc/pacman.conf && sed -i '/^Color$/a ILoveCandy' /etc/pacman.conf
 
 pacman -Syyu --noconfirm
