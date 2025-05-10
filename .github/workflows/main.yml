@@ -22,7 +22,7 @@ jobs:
           sudo systemd-nspawn -D rootfs --bind=$PWD:/mnt /bin/bash -c "/mnt/setup-aarchd-repo.sh"
 
       - name: Pack rootfs
-        run: tar czf rootfs.tar.gz -C rootfs .
+        run: sudo tar czf rootfs.tar.gz -C rootfs .
 
       - name: Delete previous release and tag (if exists)
         run: |
