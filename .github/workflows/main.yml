@@ -20,8 +20,7 @@ jobs:
 
       - name: Set up aarchD repo
         run: |
-          sudo systemd-nspawn -D rootfs --bind=$PWD:/mnt /bin/bash -c " \
-            /mnt/setup-aarchd-repo.sh \"
+          sudo systemd-nspawn -D rootfs --bind=$PWD:/mnt /bin/bash -c "/mnt/setup-aarchd-repo.sh"
 
       - name: Pack rootfs
         run: tar czf rootfs.tar.gz -C rootfs .
