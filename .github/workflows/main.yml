@@ -13,16 +13,18 @@ jobs:
 
       - name: Build rootfs
         run: |
-          sudo apt-get update && sudo apt-get install systemd-container
           git clone https://github.com/aarchd/arch-bootstrap --depth 1
           sudo ./arch-bootstrap/arch-bootstrap.sh -a "aarch64" -r "http://dk.mirror.archlinuxarm.org" rootfs
 
       - name: Set up aarchd repo and autologin
         run: |
-          sudo systemd-nspawn -D rootfs --bind=$PWD:/mnt \
-          /bin/bash -c \
-          "/mnt/setup-aarchd-repo.sh && \
-          /mnt/setup-autologin.sh"
+          git clone https://github.com/aarchd/arch-install-scripts --depth 1
+          sudo make -j4 -C arch-install-scripts install
+          sudo mount --bind "$PWD" rootfs/mnt
+          sudo arch-chroot rootfs /bin/bash -c "\
+              /mnt/setup-aarchd-repo.sh && \
+              /mnt/setup-autologin.sh"
+          sudo umount rootfs/mnt
 
       - name: Pack rootfs
         run: sudo tar czf rootfs.tar.gz -C rootfs .
