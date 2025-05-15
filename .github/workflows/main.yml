@@ -14,7 +14,7 @@ jobs:
       - name: Build rootfs
         run: |
           git clone https://github.com/aarchd/arch-bootstrap --depth 1
-          sudo ./arch-bootstrap/arch-bootstrap.sh -a "aarch64" -r "http://dk.mirror.archlinuxarm.org" rootfs
+          sudo ./arch-bootstrap/arch-bootstrap.sh -a "aarch64" -r "http://hu.mirror.archlinuxarm.org" rootfs
 
       - name: Set up aarchd repo and autologin
         run: |
