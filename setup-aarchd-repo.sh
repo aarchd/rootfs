@@ -24,9 +24,11 @@ Include = /etc/pacman.d/aarchd-mirrorlist
     fi
 fi
 
-# set SigLevel to default
-sed -i "s/^[[:space:]]*SigLevel[[:space:]]*=.*$/SigLevel = Required DatabaseOptional/" "/etc/pacman.conf"
-# other stuff 
-sed -i '/^#Color/s/^#//' /etc/pacman.conf && sed -i '/^Color$/a ILoveCandy' /etc/pacman.conf
-
 pacman -Syyu --noconfirm
+
+find "/etc" -type f -name '*.pacnew' | while read -r pacnew; do
+  orig="${pacnew%.pacnew}"
+  echo "Replacing $orig with $pacnew"
+  mv -f "$pacnew" "$orig"
+done
+sed -i "s/^[[:space:]]*\(CheckSpace\)/# \1/" "/etc/pacman.conf"
