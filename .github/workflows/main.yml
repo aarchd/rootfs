@@ -29,7 +29,7 @@ jobs:
           sudo umount rootfs/mnt
 
       - name: Pack rootfs
-        run: sudo tar czf rootfs.tar.gz -C rootfs .
+        run: sudo tar -cf rootfs.tar.zst -C rootfs . --use-compress-program="zstd -19 -T0"
 
       - name: Delete previous release and tag (if exists)
         run: |
@@ -43,7 +43,7 @@ jobs:
         with:
           name: "Release"
           tag_name: "latest"
-          files: rootfs.tar.gz
+          files: rootfs.tar.zst
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
