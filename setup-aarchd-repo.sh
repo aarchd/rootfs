@@ -4,8 +4,8 @@ set -euo pipefail
 
 pacman-key --init
 pacman-key --populate archlinuxarm
-pacman-key --recv-key 6290731A5B773E16 --keyserver keyserver.ubuntu.com
-pacman-key --lsign-key 6290731A5B773E16
+pacman-key --recv-key ABA995E195BFBEDB --keyserver keyserver.ubuntu.com
+pacman-key --lsign-key ABA995E195BFBEDB
 
 pacman -U 'https://aarchd.who53.me/repo/aarchd-keyring-1.0-1-any.pkg.tar.zst' --noconfirm
 pacman -U 'https://aarchd.who53.me/repo/aarchd-mirrorlist-1.0-1-any.pkg.tar.zst' --noconfirm
