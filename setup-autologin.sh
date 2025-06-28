@@ -1,14 +1,9 @@
-mkdir -p /etc/systemd/system/{console-getty,getty@tty1}.service.d
+#!/bin/bash
 
-# for container
-cat <<EOF > /etc/systemd/system/console-getty.service.d/autologin.conf
-[Service]
-ExecStart=
-ExecStartPre=-/usr/bin/sed -i '/pam_loginuid.so/d' /etc/pam.d/login
-ExecStart=-/sbin/agetty --autologin root --noclear --keep-baud console 115200 38400 9600 vt
-EOF
+set -euo pipefail
 
-# for actual tty
+mkdir -p /etc/systemd/system/getty@tty1.service.d
+
 cat <<EOF > /etc/systemd/system/getty@tty1.service.d/autologin.conf
 [Service]
 ExecStart=
